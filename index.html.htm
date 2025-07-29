@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Joshua Denielle Guiao</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Courier New', monospace;
+      background: url('https://i.pinimg.com/originals/39/ec/d1/39ecd18dfe039f474138051777c6f0b9.gif') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #cce7c9;
+    }
+
+    .container {
+      background-color: rgba(16, 16, 16, 0.85);
+      border: 2px solid #96f096;
+      box-shadow: 0 0 12px rgba(150, 240, 150, 0.4);
+      padding: 30px;
+      max-width: 800px;
+      width: 90%;
+      text-align: center;
+    }
+
+    h1, h2 {
+      color: #d18fc0;
+      margin: 20px 0 10px;
+    }
+
+    ul {
+      text-align: left;
+      margin-left: 20px;
+    }
+
+    li {
+      margin-bottom: 5px;
+      color: #bfffc7;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px dashed #96f096;
+      margin: 20px 0;
+    }
+
+    input, textarea {
+      background-color: #1f1f1f;
+      color: #aefcbe;
+      border: 2px solid #96f096;
+      padding: 8px;
+      margin-top: 10px;
+      width: 90%;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #6c3c8c;
+      border: 2px solid #d18fc0;
+      color: #ffffff;
+      cursor: pointer;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background-color: #8d5db6;
+    }
+
+    .comment {
+      background-color: rgba(34, 34, 34, 0.7);
+      border-left: 3px solid #96f096;
+      padding: 10px;
+      margin-top: 10px;
+      color: #ccffcc;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Joshua Denielle Guiao</h1>
+    <p>Aspiring 3D Designer</p>
+
+    <h2>About Me</h2>
+    <p>Passionate about gaming and digital art with a growing interest in 3D design.</p>
+
+    <h2>Education</h2>
+    <ul>
+      <li>Elementary School, Balutu Elementary School, [2016]</li>
+      <li>High School Diploma, Anastascio G Yumul High school, [2022]</li>
+      <li>Advance in English</li>
+    </ul>
+
+    <hr>
+
+    <h2>Skills</h2>
+    <ul>
+      <li>3D Modeling with Blender: Basic modeling, texturing, and rendering</li>
+      <li>Unity Engine: Intro-level scene creation and scripting</li>
+      <li>Programming: Basic C# or Python</li>
+    </ul>
+
+    <hr>
+
+    <h2>Projects</h2>
+    <ul>
+     <li>Ordering System – Built with Java, supports item selection and total calculation</li>
+    <li>Calculator – Developed in visual studio, handles basic arithmetic operations</li>
+    </ul>
+
+    <hr>
+
+    <h2>Contact</h2>
+    <ul>
+  <li>jdguiao14@gmail.com</a></li>
+  <li>GitHub: <a href="https://github.com/Hansquin" target="_blank">https://github.com/Hansquin</a></li>
+    </ul>
+ 
+     <hr>
+
+    <h2>Comment Section</h2>
+    <form id="commentForm">
+      <input type="text" id="commentName" placeholder="Your name" required><br>
+      <textarea id="commentText" placeholder="Write your comment..." rows="3" required></textarea><br>
+      <button type="submit">Post Comment</button>
+    </form>
+    <div id="comments"></div>
+  </div>
+
+  <script>
+    document.getElementById('commentForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('commentName').value;
+      const text = document.getElementById('commentText').value;
+      const commentDiv = document.createElement('div');
+      commentDiv.classList.add('comment');
+      commentDiv.innerHTML = `<strong>${name}</strong><p>${text}</p>`;
+      document.getElementById('comments').appendChild(commentDiv);
+      this.reset();
+    });
+  </script>
+</body>
+</html>
