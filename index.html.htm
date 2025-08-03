@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
   <title>Joshua Denielle Guiao</title>
   <style>
     html, body {
@@ -80,6 +81,23 @@
       margin-top: 10px;
       color: #ccffcc;
       text-align: left;
+      position: relative;
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #962e2e;
+      color: white;
+      border: none;
+      padding: 3px 8px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .delete-btn:hover {
+      background: #c93a3a;
     }
   </style>
 </head>
@@ -93,9 +111,9 @@
 
     <h2>Education</h2>
     <ul>
-      <li>Elementary School, Balutu Elementary School, [2016]</li>
-      <li>High School Diploma, Anastascio G Yumul High school, [2022]</li>
-      <li>Advance in English</li>
+      <li>Elementary School, Balutu Elementary School, 2016</li>
+      <li>High School Diploma, Anastascio G Yumul High School, 2022</li>
+      <li>Advanced in English</li>
     </ul>
 
     <hr>
@@ -111,19 +129,19 @@
 
     <h2>Projects</h2>
     <ul>
-     <li>Ordering System – Built with Java, supports item selection and total calculation</li>
-    <li>Calculator – Developed in visual studio, handles basic arithmetic operations</li>
+      <li>Ordering System – Built with Java, supports item selection and total calculation</li>
+      <li>Calculator – Developed in Visual Studio, handles basic arithmetic operations</li>
     </ul>
 
     <hr>
 
     <h2>Contact</h2>
     <ul>
-  <li>jdguiao14@gmail.com</a></li>
-  <li>GitHub: <a href="https://github.com/Hansquin" target="_blank">https://github.com/Hansquin</a></li>
+      <li>Email: jdguiao14@gmail.com</li>
+      <li>GitHub: <a href="https://github.com/Hansquin" target="_blank">https://github.com/Hansquin</a></li>
     </ul>
- 
-     <hr>
+
+    <hr>
 
     <h2>Comment Section</h2>
     <form id="commentForm">
@@ -135,16 +153,53 @@
   </div>
 
   <script>
-    document.getElementById('commentForm').addEventListener('submit', function(e) {
+    const commentForm = document.getElementById('commentForm');
+    const commentsContainer = document.getElementById('comments');
+
+    function getComments() {
+      return JSON.parse(localStorage.getItem('comments') || '[]');
+    }
+
+    function saveComments(comments) {
+      localStorage.setItem('comments', JSON.stringify(comments));
+    }
+
+    function deleteComment(index) {
+      const comments = getComments();
+      comments.splice(index, 1);
+      saveComments(comments);
+      renderComments();
+    }
+
+    function renderComments() {
+      const comments = getComments();
+      commentsContainer.innerHTML = '';
+      comments.forEach((comment, index) => {
+        const div = document.createElement('div');
+        div.className = 'comment';
+        div.innerHTML = `
+          <strong>${comment.name}</strong>
+          <p>${comment.text}</p>
+          <button class="delete-btn" onclick="deleteComment(${index})">Delete</button>
+        `;
+        commentsContainer.appendChild(div);
+      });
+    }
+
+    commentForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      const name = document.getElementById('commentName').value;
-      const text = document.getElementById('commentText').value;
-      const commentDiv = document.createElement('div');
-      commentDiv.classList.add('comment');
-      commentDiv.innerHTML = `<strong>${name}</strong><p>${text}</p>`;
-      document.getElementById('comments').appendChild(commentDiv);
-      this.reset();
+      const name = document.getElementById('commentName').value.trim();
+      const text = document.getElementById('commentText').value.trim();
+      if (!name || !text) return;
+
+      const comments = getComments();
+      comments.push({ name, text });
+      saveComments(comments);
+      renderComments();
+      commentForm.reset();
     });
+
+    window.onload = renderComments;
   </script>
 </body>
 </html>
